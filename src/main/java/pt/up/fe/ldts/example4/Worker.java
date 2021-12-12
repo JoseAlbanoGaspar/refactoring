@@ -14,9 +14,11 @@ public class Worker {
         this.username = username;
         this.password = password;
     }
-
+    public boolean hasLogin(){
+        return true;
+    }
     public boolean login(String username, String password) {
-        return this.username.equals(username) && this.password.equals(password);
+        return hasLogin() ? this.username.equals(username) && this.password.equals(password) : false;
     }
 
     public String getName() {
