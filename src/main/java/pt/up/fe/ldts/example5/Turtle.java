@@ -22,39 +22,58 @@ public class Turtle {
     public char getDirection() {
         return direction;
     }
-
+    public void rotateLeft(){
+        if (direction == 'N') {
+            direction = 'W';
+            return;
+        }
+        if (direction == 'W'){
+            direction = 'S';
+            return;
+        }
+        if (direction == 'S') {
+            direction = 'E';
+            return;
+        }
+        if (direction == 'E') {
+            direction = 'N';
+            return;
+        }
+    }
+    public void rotateRight(){
+        if (direction == 'N'){
+            direction = 'E';      //CODE SMELL - Replace Nested Conditional with Guard Clauses
+            return;
+        }
+        if (direction == 'E'){
+            direction = 'S';
+            return;
+        }
+        if (direction == 'S'){
+            direction = 'W';
+            return;
+        }
+        if (direction == 'W'){
+            direction = 'N';
+            return;
+        }
+    }
+    public void moveForward(){
+        if (direction == 'N') row--;
+        if (direction == 'S') row++;
+        if (direction == 'W') column--;
+        if (direction == 'E') column++;
+    }
     public void execute(char command) {
-        switch (command) {
-            case 'L':  //ROTATE LEFT
-                if (direction == 'N')
-                    direction = 'W';         //CODE SMELL - Replace Nested Conditional with Guard Clauses
-                if (direction == 'W')
-                    direction = 'S';
-                if (direction == 'S')
-                    direction = 'E';
-                if (direction == 'E')
-                    direction = 'N';
-                break;
-            case 'R':    //ROTATE RIGHT
-                if (direction == 'N')
-                    direction = 'E';
-                if (direction == 'E')
-                    direction = 'S';
-                if (direction == 'S')
-                    direction = 'W';
-                if (direction == 'W')
-                    direction = 'N';
-                break;
-            case 'F':      //MOVE FORWARD
-                if (direction == 'N')
-                    row--;
-                if (direction == 'S')
-                    row++;
-                if (direction == 'W')
-                    column--;
-                if (direction == 'E')
-                    column++;
-                break;
+
+        if (command == 'L') { // ROTATE LEFT    CODE SMELL - If statements must be short
+            rotateLeft();
+        } else if (command == 'R') { // ROTATE RIGHT
+            rotateRight();
+        } else if (command == 'F') { // MOVE FORWARD
+           moveForward();
         }
     }
 }
+
+
