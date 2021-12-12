@@ -23,7 +23,7 @@ public class Tree {
         this.locationLongitude = locationLongitude;
         this.locationName = locationName;
     }
-
+    @Override
     public String toString() {
         return "Tree planted at " + this.plantedAt.toString() + " in location " + this.locationLatitude + "," + this.locationLongitude + " (" + this.locationName + ")";
     }
@@ -35,20 +35,23 @@ public class Tree {
     public List<Date> getAppraisals(){
         return this.appraisalDates;
     }
+    public Date lastAppraisalDate(){
 
-    public boolean isNextAppraisalOverdue(){
-        Date today = new Date();
-        Date latestAppraisalDate = today;
+        Date latestAppraisalDate = new Date();
 
         if (this.appraisalDates.size() > 0) {
             latestAppraisalDate = this.appraisalDates.get(0);
         }
-        for(Date appraisalDate : this.appraisalDates) {
+        for (Date appraisalDate : this.appraisalDates) {
             if (latestAppraisalDate.before(appraisalDate)) {
                 latestAppraisalDate = appraisalDate;
             }
         }
-
+        return latestAppraisalDate;
+    }
+    public boolean isNextAppraisalOverdue() {
+        Date latestAppraisalDate = lastAppraisalDate();
+        Date today = new Date();
         // Calculate next appraisal date
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(latestAppraisalDate);
@@ -63,4 +66,7 @@ public class Tree {
         // Appraisal is only overdue if its date is in the past
         return nextAppraisalDate.before(today);
     }
+
+    //CODE SMELL - One method must do just one thing and not more.
+    // With the refactor method applied, it avoids, for example, duplicate code, if I wanted now to know the latest appraisal date.
 }
