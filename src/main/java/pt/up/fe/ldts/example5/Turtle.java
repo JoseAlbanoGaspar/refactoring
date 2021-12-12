@@ -24,21 +24,37 @@ public class Turtle {
     }
 
     public void execute(char command) {
-        if (command == 'L') { // ROTATE LEFT
-            if (direction == 'N') direction = 'W';
-            else if (direction == 'W') direction = 'S';
-            else if (direction == 'S') direction = 'E';
-            else if (direction == 'E') direction = 'N';
-        } else if (command == 'R') { // ROTATE RIGHT
-            if (direction == 'N') direction = 'E';
-            else if (direction == 'E') direction = 'S';
-            else if (direction == 'S') direction = 'W';
-            else if (direction == 'W') direction = 'N';
-        } else if (command == 'F'){ // MOVE FORWARD
-            if (direction == 'N') row--;
-            if (direction == 'S') row++;
-            if (direction == 'W') column--;
-            if (direction == 'E') column++;
+        switch (command) {
+            case 'L':  //ROTATE LEFT
+                if (direction == 'N')
+                    direction = 'W';         //CODE SMELL - Replace Nested Conditional with Guard Clauses
+                if (direction == 'W')
+                    direction = 'S';
+                if (direction == 'S')
+                    direction = 'E';
+                if (direction == 'E')
+                    direction = 'N';
+                break;
+            case 'R':    //ROTATE RIGHT
+                if (direction == 'N')
+                    direction = 'E';
+                if (direction == 'E')
+                    direction = 'S';
+                if (direction == 'S')
+                    direction = 'W';
+                if (direction == 'W')
+                    direction = 'N';
+                break;
+            case 'F':      //MOVE FORWARD
+                if (direction == 'N')
+                    row--;
+                if (direction == 'S')
+                    row++;
+                if (direction == 'W')
+                    column--;
+                if (direction == 'E')
+                    column++;
+                break;
         }
     }
 }
