@@ -1,12 +1,14 @@
 package pt.up.fe.ldts.example4;
 
-public class Client extends Worker {
+public class Client extends Person {
 
     public Client(String name, String phone) {
-        super(name, phone, null, null);
+        super(name, phone);
     }
-    @Override
-    public boolean hasLogin(){return false;}
+
+    public boolean hasLogin(){
+        return false;
+    }
 }
     /* NOTA:
         Code Smell - Client não é um tipo de trabalhador pelo que não precisa de ter um login, apenas nome e phone.
