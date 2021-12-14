@@ -6,30 +6,30 @@ import java.text.SimpleDateFormat
 class TreeSpockTest extends Specification {
     def tree
     def date
+    def location
 
     def setup() {
         def sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss")
         date = sdf.parse("31-08-2002 10:20:56")
-        tree = new Tree(date, "41.177772696363114", "-8.59843522310257", "FEUP")
+        location = new Location("41.177772696363114", "-8.59843522310257", "FEUP")
+        tree = new Tree(date, location)
     }
 
     def 'Tree Creation'() {
         expect:
             tree.plantedAt == date
-            tree.locationLatitude == "41.177772696363114"
-            tree.locationLongitude == "-8.59843522310257"
-            tree.locationName == "FEUP"
+            tree.location == location
     }
 
     def 'Tree Set Location'() {
         given:
-            tree.setLocation("loclat", "loclon", "locname")
+            def loc = new Location("loclat", "loclon", "locname")
 
         expect:
             tree.plantedAt == date
-            tree.locationLatitude == "loclat"
-            tree.locationLongitude == "loclon"
-            tree.locationName == "locname"
+            loc.latitude == "loclat"
+            loc.longitude == "loclon"
+            loc.name == "locname"
     }
 
     def 'Tree to String'() {
